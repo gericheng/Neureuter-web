@@ -1,0 +1,29 @@
+$scope.loadSubMenu = function (id, keyNum) {
+
+
+
+        var promise = $window.api_endpoint + '/category/get_tree/'+id,
+                  {headers: {'dwarf-secret': $window.api_publickey}},
+                  {data: "locale=enUS"}
+           );
+        
+        $http({
+          method: 'get',
+          url: $window.api_endpoint + '/category/get_tree/'+id,
+          data: "locale=enUS",
+          headers: {
+          "dwarf-secret": $window.api_publickey
+          }
+        }).then(function (response) {
+        //   MenuObj.subMenuitem =
+           $scope.itemArray[keyNum].subMenuitem = response.data.message.related_nodes;
+           //return
+           $window.report('warn', $scope.itemArray);
+
+        }, function (error) {
+          $window.report('error', error);
+        });
+      }
+
+
+header_contact
